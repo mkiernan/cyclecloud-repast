@@ -63,7 +63,7 @@ mountpoint = /mnt/exports/shared
         [[[configuration]]]
         [[[cluster-init cyclecloud/pbspro:execute]]]
         [[[cluster-init prometheus:default:1.0.0]]]
-        [[[cluster-init repast:default:1.0.0]]]
+        [[[cluster-init repast:execute:1.0.0]]]
 
         [[[network-interface eth0]]]
         AssociatePublicIpAddress = $ExecuteNodesPublic
