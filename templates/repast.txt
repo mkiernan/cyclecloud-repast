@@ -1,5 +1,4 @@
 # template generated with template generator #
-
 ##################################
 ### Repast CycleCloud Template ###
 ##################################
@@ -24,14 +23,21 @@ Autoscale = $Autoscale
     #    export_path = $ANFExport
     #    address = $ANFServerName
 
+        [[[configuration]]]
+        cyclecloud.selinux.policy = permissive
+
+        [[[cluster-init cyclecloud/pbspro:default]]]
+        [[[cluster-init repast:default:1.0.0]]]
+        Optional = true
+
     [[node master]]
     MachineType = $MasterMachineType
     IsReturnProxy = $ReturnProxy
     AdditionalClusterInitSpecs = $MasterClusterInitSpecs
         [[[configuration]]]
         [[[cluster-init cyclecloud/pbspro:master]]]
-        [[[cluster-init prometheus:default:1.0.0]]]
         [[[cluster-init repast:master:1.0.0]]]
+        [[[cluster-init prometheus:default:1.0.0]]]
 
         [[[network-interface eth0]]]
         AssociatePublicIpAddress = $UsePublicNetwork
@@ -39,6 +45,15 @@ Autoscale = $Autoscale
         [[[input-endpoint ganglia]]]
         PrivatePort = 8652
         PublicPort = 8652
+
+[[[volume shared]]]
+size=2000
+persistent=true
+mount = shared
+SSD = True
+
+[[[configuration cyclecloud.mounts.shared]]]
+mountpoint = /mnt/exports/shared
 
     [[nodearray execute]]
     MachineType = $ExecuteMachineType
@@ -57,7 +72,7 @@ Autoscale = $Autoscale
 Order = 1
 
     [[parameters Template Description]]
-    Description = "This this cluster is set up to use the pbspro scheduler"
+    Description = "This repast-hpc cluster is set up to use pbspro scheduler"
 
     Order = 10
 
@@ -69,7 +84,7 @@ Order = 1
         Label = Region
         Description = Deployment Location
         ParameterType = Cloud.Region
-        DefaultValue = westus2
+        DefaultValue = westeurope
 
         [[[parameter SubnetId]]]
         Label = Subnet ID
