@@ -1,0 +1,8 @@
+#PBS -N zombie_15m_256
+#PBS -l select=2:ncpus=32 -l place=scatter
+module load mpi/impi_2018.4.274
+cd $PBS_O_WORKDIR
+REPAST=/shared/repast_hpc-2.3.0/bin/zombie/
+#CONFIG=/shared/repast_hpc-2.3.0/bin/zombie/
+CONFIG=/shared/home/mk
+mpirun -np 64 -genv I_MPI_FABRICS=shm:ofa -genv I_MPI_FALLBACK_DEVICE=0 $REPAST/zombie_model $CONFIG/config.props $CONFIG/model.props

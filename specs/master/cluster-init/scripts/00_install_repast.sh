@@ -37,10 +37,10 @@ setup_build_tools()
 
     # setup GCC 7.2
     echo "Installing GCC 7.2"
-    yum install centos-release-scl-rh -y
-    yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc -y
-    yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc-c++ -y
-    yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc-gfortran -y
+    #yum install centos-release-scl-rh -y
+    #yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc -y
+    #yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc-c++ -y
+    #yum --enablerepo=centos-sclo-rh-testing install devtoolset-7-gcc-gfortran -y
 
 } #-- setup_build_tools() --#
 
@@ -114,12 +114,12 @@ echo "*********************************************************"
 setup_build_tools
 # flip to gcc7 environment avoiding forkbomb
 # scl enable devtoolset-7 bash
-source /opt/rh/devtoolset-7/enable
-source /opt/intel/mkl/bin/mklvars.sh intel64
-source /opt/intel/impi/2018.4.274/intel64/bin/mpivars.sh
+#source /opt/rh/devtoolset-7/enable
+#source /opt/intel/mkl/bin/mklvars.sh intel64
+#source /opt/intel/impi/2018.4.274/intel64/bin/mpivars.sh
 setup_repast_env # boost needs mpi in path
 source /etc/profile
-#module load gcc-8.2.0
+module load gcc-8.2.0
 module load mpi/impi_2018.4.274
 install_boost_mpi
 install_repast
